@@ -1,0 +1,98 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Calculator Container */
+.calculator {
+  max-width: 400px;
+  margin: 0 auto; /* Center the calculator horizontally */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Screen Styling */
+.screen {
+  height: 70px;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-right: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncate long text */
+  white-space: nowrap;
+}
+
+/* Buttons Grid */
+.buttons {
+  display: grid;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Button Styling */
+button {
+  height: 60px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 1px solid #ddd; /* Button borders */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  /* Ensure grid lines appear by making borders visible */
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+/* Hover Effects */
+button:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+button:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Special Buttons */
+#clear {
+  background-color: #ff6b6b; /* Red for AC */
+  color: white;
+}
+
+#clear:hover {
+  background-color: #ff4d4d;
+}
+
+#modulo, #square, #divide, #multiply, #subtract, #add {
+  background-color: #6c757d; /* Grey for operators */
+  color: white;
+}
+
+#modulo:hover, #square:hover, #divide:hover, #multiply:hover, #subtract:hover, #add:hover {
+  background-color: #5a6268;
+}
+
+#equals {
+  background-color: #28a745; /* Green for equals */
+  color: white;
+}
+
+#equals:hover {
+  background-color: #218838;
+}
+
+#decimal {
+  background-color: #f1c40f; /* Yellow for decimal */
+}
+
+#decimal:hover {
+  background-color: #e0b90b;
+}
+
+/* Make 0 button span two columns */
+button.col-6 {
+  width: 100%;
+}
