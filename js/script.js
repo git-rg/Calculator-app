@@ -28,8 +28,10 @@ buttons.forEach(button => {
         operator = '';
       }
     } else if (value === '%') {
-      // Modulo operator
-      currentInput = (parseFloat(currentInput) / 100).toString();
+      // Modulo operation - get remainder
+      if (previousInput !== '') {
+        currentInput = (parseFloat(previousInput) % parseFloat(currentInput)).toString();
+      }
     } else if (value === 'x²') {
       // Square the current input
       currentInput = (Math.pow(parseFloat(currentInput), 2)).toString();
@@ -39,7 +41,7 @@ buttons.forEach(button => {
         currentInput = evaluateExpression(previousInput, operator, currentInput);
       }
       previousInput = currentInput;
-      operator = value === '×' ? '*' : value === '÷' ? '/' : value;
+      operator = value === '×' ? '*' : value === '÷' ? '/' : value; // Ensure operator is set correctly
       currentInput = '0';
     } else {
       // Handle numbers and decimal point
@@ -67,7 +69,7 @@ function evaluateExpression(num1, operator, num2) {
     case '*':
       return (num1 * num2).toString();
     case '/':
-      return num2 !== 0 ? (num1 / num2).toString() : 'Error';
+      return num2 !== 0 ? (num1 / num2).toString() : 'Error'; // Correct division handling
     default:
       return num2.toString();
   }
@@ -78,8 +80,8 @@ document.addEventListener('keydown', (event) => {
   const key = event.key;
 
   if ('0123456789'.includes(key)) {
-    // If the key is a number, append it to the current input
-    if (currentInput === '0' && key !== '.') {
+    // If the key is a number, set or append it to the current input
+    if (currentInput === '0') {
       currentInput = key;
     } else {
       currentInput += key;
@@ -94,24 +96,20 @@ document.addEventListener('keydown', (event) => {
   } else if (key === 'Backspace') {
     // Delete the last character when Backspace is pressed
     currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : '0';
-  } else if (key === '+') {
-    operator = key;
-    previousInput = currentInput;
-    currentInput = '0';
-  } else if (key === '-') {
+  } else if (['+', '-'].includes(key)) {
     operator = key;
     previousInput = currentInput;
     currentInput = '0';
   } else if (key === '*') {
-    operator = '×';
+    operator = '*';
     previousInput = currentInput;
     currentInput = '0';
   } else if (key === '/') {
-    operator = '÷';
+    operator = '/';
     previousInput = currentInput;
     currentInput = '0';
   } else if (key === '%') {
-    currentInput = (parseFloat(currentInput) / 100).toString();
+    currentInput = (parseFloat(previousInput) % parseFloat(currentInput)).toString();
   } else if (key === '.') {
     // Handle decimal point
     if (!currentInput.includes('.')) {
